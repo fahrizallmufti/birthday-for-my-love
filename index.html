@@ -210,71 +210,6 @@
       50% { border-color: transparent; }
     }
 
-    /* Penambahan untuk fitur scroll dan responsivitas HP */
-    body {
-      overflow-y: auto; /* Mengaktifkan scroll vertikal */
-    }
-
-    .slide {
-      min-height: 100vh; /* Mengubah dari height: 100vh agar bisa scroll jika konten lebih tinggi */
-      height: auto;
-    }
-
-    /* Media query untuk tampilan HP (layar kecil) */
-    @media (max-width: 768px) {
-      .slide {
-        padding: 20px; /* Mengurangi padding untuk layar kecil */
-      }
-
-      h1 {
-        font-size: 24px; /* Mengurangi ukuran font h1 */
-      }
-
-      h2 {
-        font-size: 20px; /* Mengurangi ukuran font h2 */
-      }
-
-      .options {
-        flex-direction: column; /* Mengubah flex direction menjadi kolom untuk tombol opsi */
-        gap: 15px;
-      }
-
-      .option-btn {
-        font-size: 36px; /* Mengurangi ukuran font tombol opsi */
-        width: 100px;
-        height: 100px;
-      }
-
-      .gift-wrapper {
-        grid-template-columns: 1fr; /* Mengubah grid menjadi satu kolom untuk mobile */
-        gap: 20px;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr; /* Mengubah grid foto menjadi satu kolom */
-        gap: 10px;
-      }
-
-      .photo-grid img {
-        height: 150px; /* Mengurangi tinggi gambar untuk mobile */
-      }
-
-      .gift-text {
-        font-size: 14px; /* Mengurangi ukuran font teks hadiah */
-        padding: 15px;
-      }
-
-      .letter {
-        max-width: 100%; /* Membuat letter full width pada mobile */
-        padding: 15px;
-      }
-
-      iframe {
-        width: 100%; /* Membuat iframe full width */
-        height: 300px; /* Mengurangi tinggi iframe untuk mobile */
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -340,7 +275,7 @@
   <div class="slide" id="music">
     <h1>Lagu untukmu 🎶</h1>
     <p style="font-size:18px; margin-top:-10px;">this song is for you 💖</p>
-    <iframe id="spotifyPlayer" src="https://open.spotify.com/embed/track/1lzvc17qKf2CyIOSWUEH4p?autoplay=1" width="300" height="380" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe id="spotifyPlayer" src="https://open.spotify.com/embed/track/1lzvc17qKf2CyIOSWUEH4p?si=65cc468a6def4b80?autoplay=1" width="300" height="380" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     <button onclick="goTo('slide3')">Kembali</button>
   </div>
 
