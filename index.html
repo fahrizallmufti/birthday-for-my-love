@@ -10,7 +10,8 @@
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       height: 100vh;
-      overflow: hidden;
+      /* Diubah agar background tetap fixed saat scroll */
+      overflow: hidden; 
     }
 
     body::before {
@@ -37,6 +38,14 @@
       box-sizing: border-box;
       color: #fff;
       animation: fadeSlide 0.8s ease;
+      /* FITUR SCROLL TAMBAHAN */
+      overflow-y: auto; 
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Menghilangkan scrollbar tapi tetap bisa di-scroll (opsional agar estetik) */
+    .slide::-webkit-scrollbar {
+      display: none;
     }
 
     @keyframes fadeSlide {
@@ -47,8 +56,17 @@
     .active {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      /* Diubah ke flex-start agar saat konten panjang tidak terpotong di atas */
+      justify-content: flex-start; 
       align-items: center;
+    }
+
+    /* Penyesuaian agar konten tetap di tengah jika pendek */
+    .active > *:first-child {
+      margin-top: auto;
+    }
+    .active > *:last-child {
+      margin-bottom: auto;
     }
 
     h1, h2 {
@@ -82,6 +100,8 @@
     .options {
       display: flex;
       gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .option-btn {
@@ -120,6 +140,7 @@
       border-radius: 25px;
       max-width: 520px;
       animation: fadeSlide 1s ease;
+      margin: 20px 0;
     }
 
     iframe {
@@ -144,25 +165,16 @@
   
     .gift-wrapper {
       display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr; /* Responsif untuk mobile */
+      gap: 20px;
       max-width: 1100px;
       width: 100%;
       align-items: center;
       margin: 0 auto;
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .photo-grid img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 18px;
+    @media (min-width: 768px) {
+      .gift-wrapper { grid-template-columns: 360px 1fr; }
     }
 
     .photo-grid {
@@ -173,9 +185,9 @@
 
     .photo-grid img {
       width: 100%;
-      max-width: 100%;
       height: 180px;
       object-fit: cover;
+      border-radius: 18px;
     }
 
     .gift-text {
@@ -188,7 +200,6 @@
       line-height: 1.6;
     }
 
-    /* Typing effect */
     .typing {
       overflow: hidden;
       white-space: normal;
@@ -196,14 +207,9 @@
       animation: typing 3.5s steps(50, end) forwards, blink 0.7s step-end infinite;
     }
 
-    .typing.delay { animation-delay: 4.2s; }
-    .typing.delay2 { animation-delay: 8.4s; }
-
     @keyframes typing {
       from { clip-path: inset(0 100% 0 0); }
       to { clip-path: inset(0 0 0 0); }
-    }
-      to { width: 100%; }
     }
 
     @keyframes blink {
@@ -262,8 +268,8 @@
         <img src="foto4.jpg" />
       </div>
       <div class="gift-text">
-        <p class="typing">Aku simpan bagian ini khusus buat banyak cerita” kita selama ini saying. 
-          Seru yaa kita dulu berawal dari livestream si azafar sampe terus kamu masuk grup dc aku sampe” kitab isa sejauh inii. 
+        <p class="typing">Aku simpan bagian ini khusus buat banyak cerita” kita selama ini sayang. 
+          Seru yaa kita dulu berawal dari livestream si azafar sampe terus kamu masuk grup dc aku sampe” kita bisa sejauh inii. 
           Aku seneeng bangett bisa kenal dan ketemu kamu. Semenjak kita kenal, aku ngerasa aku ga harus selalu sendirii, u are my best support system. 
           Makasiii yaaa sayang💖. Aku harap jugaa kita kedepanya ga hanya lama, tapi selamanya. 
           Oh yaaa, makasii jugaa sayang kamu mau bertahan dan jadi bagian dari hidupku. Im so proud of you 🤍</p>
@@ -275,7 +281,7 @@
   <div class="slide" id="music">
     <h1>Lagu untukmu 🎶</h1>
     <p style="font-size:18px; margin-top:-10px;">this song is for you 💖</p>
-    <iframe id="spotifyPlayer" src="https://open.spotify.com/embed/track/1lzvc17qKf2CyIOSWUEH4p?si=65cc468a6def4b80?autoplay=1" width="300" height="380" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe id="spotifyPlayer" src="https://open.spotify.com/embed/track/XXXX" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <button onclick="goTo('slide3')">Kembali</button>
   </div>
 
@@ -301,7 +307,11 @@
     function goTo(id) {
       document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(id);
-      if (target) target.classList.add('active');
+      if (target) {
+          target.classList.add('active');
+          // Reset scroll ke atas setiap pindah slide
+          target.scrollTop = 0;
+      }
 
       if (id === 'music') {
         const iframe = document.getElementById('spotifyPlayer');
